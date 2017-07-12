@@ -11,7 +11,7 @@ dirList = dir;
 for d = 1:1:length(dirList)
     thisDir = dirList(d).name;
     thisZone = strtok(thisDir);
-    if thisZone == zone
+    if strcmp(thisZone,zone)
         cd(thisDir)
         break
     end
