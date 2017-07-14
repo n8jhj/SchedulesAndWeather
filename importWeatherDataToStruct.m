@@ -33,6 +33,13 @@ assert(exist('filename','var')==1, 'File name not defined')
 timestamp = datetime(num2str([yr,mo,dy,hr,mn]), ...
     'InputFormat','yyyy     M     d     H     m');
 
+%% Convert NaT values to actual datetime values
+step = 1/24;
+natInds = find(isnat(timestamp));
+for i = natInds
+    timestamp(i) = timestamp(i-1) + step;
+end
+
 %% Create return struct
 wStruct = struct(...
 'zone',zone,...
