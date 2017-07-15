@@ -6,8 +6,14 @@ function w_avg = weightedAvg(bldgType,avg_param,wt_param)
 %   BLDGTYPE of the DOE prototype buildings.
 
 %% Get values to be averaged and weights
-weights = paramData(bldgType,wt_param);
-values = paramData(bldgType,avg_param);
+[weights,~] = paramData(bldgType,wt_param);
+[values,~] = paramData(bldgType,avg_param);
+
+%% Check that weights and values have same number of elements
+sz_w = size(weights);
+sz_v = size(values);
+assert(sz_w(1) == sz_v(1), ...
+    '''weights'' and ''values'' must be of same length.')
 
 %% Calculate weighted average
 w_total = sum([weights{:,2}]);
